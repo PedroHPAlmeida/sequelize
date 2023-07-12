@@ -1,56 +1,57 @@
 const db = require("../models");
 
-class PessoaController {
+class NiveisController {
 
-    static async pegaTodasPessoas(req, res) {
+    static async buscarNiveis(req, res) {
         try {
-            const pessoas = await db.Pessoas.findAll();
-            res.status(200).json(pessoas);
+            const niveis = await db.Niveis.findAll();
+            res.status(200).json(niveis);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
 
-    static async pegarPessoaPorId(req, res) {
+    static async buscarNivelPorId(req, res) {
         try {
             const id = Number(req.params.id);
-            const pessoa = await db.Pessoas.findByPk(id);
-            res.status(200).json(pessoa);
+            const nivel = await db.Niveis.findByPk(id);
+            res.status(200).json(nivel);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
 
-    static async salvarPessoa(req, res) {
+    static async salvarNivel(req, res) {
         try {
             const body = req.body;
-            const pessoa  = await db.Pessoas.create(body);
-            res.status(201).json(pessoa);
+            const nivel = await db.Niveis.create(body);
+            res.status(201).json(nivel);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
 
-    static async atualizarPessoaPorId(req, res) {
+    static async alterarPorId(req, res) {
         try {
             const id = Number(req.params.id);
-            const pessoa = req.body;
-            await db.Pessoas.update(pessoa, { where: { id: id } });
+            const nivel = req.body;
+            await db.Niveis.update(nivel, { where: { id: id } });
             res.status(204).send();
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
 
-    static async deletarPessoaPorId(req, res) {
+    static async deletarPorId(req, res) {
         try {
             const id = Number(req.params.id);
-            await db.Pessoas.destroy({ where: { id: id } });
+            await db.Niveis.destroy({ where: { id: id } });
             res.status(204).send();
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
+
 }
 
-module.exports = PessoaController;
+module.exports = NiveisController;
