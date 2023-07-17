@@ -108,6 +108,17 @@ class PessoaController {
             res.status(500).json({ message: error.message });
         }
     }
+    
+    static async restauraPessoa(req, res) {
+        try {
+            const id = Number(req.params.id);
+            await db.Pessoas.restore({ where: { id: id } });
+            res.status(204).send();
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
 }
 
 module.exports = PessoaController;
