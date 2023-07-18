@@ -38,6 +38,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     scopes: {
       todos: { where: {} }
+    },
+    validate: {
+      nomeValido() {
+        const nome = this.nome.trim();
+        if (this.nome.length < 3) {
+          throw new Error("Nome inválido")
+        }
+      }
     }
   });
   return Pessoas;
