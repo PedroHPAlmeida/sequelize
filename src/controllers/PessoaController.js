@@ -4,6 +4,15 @@ class PessoaController {
 
     static async pegaTodasPessoas(req, res) {
         try {
+            const pessoas = await db.Pessoas.scope('todos').findAll();
+            res.status(200).json(pessoas);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    static async pegaTodasPessoasAtivas(req, res) {
+        try {
             const pessoas = await db.Pessoas.findAll();
             res.status(200).json(pessoas);
         } catch (error) {

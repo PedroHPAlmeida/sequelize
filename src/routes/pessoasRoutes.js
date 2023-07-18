@@ -5,6 +5,7 @@ const router = Router();
 
 router
     .get("/pessoas", PessoasController.pegaTodasPessoas)
+    .get("/pessoas/ativo", PessoasController.pegaTodasPessoasAtivas)
     .get("/pessoas/:id", PessoasController.pegarPessoaPorId)
     .post("/pessoas", PessoasController.salvarPessoa)
     .put("/pessoas/:id", PessoasController.atualizarPessoaPorId)
