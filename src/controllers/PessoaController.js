@@ -128,6 +128,18 @@ class PessoaController {
         }
     }
 
+    
+    static async pegaMatriculas(req, res) {
+        try {
+            const id = Number(req.params.estudanteId);
+            const pessoa = await db.Pessoas.findOne({ where: { id: id } });
+            const matriculas = await pessoa.getAulasMatriculadas();
+            res.status(200).json(matriculas);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+    
 }
 
 module.exports = PessoaController;
