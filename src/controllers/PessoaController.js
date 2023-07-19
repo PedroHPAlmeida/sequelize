@@ -139,7 +139,24 @@ class PessoaController {
             res.status(500).json({ message: error.message });
         }
     }
-    
+
+    static async pegaMatriculasPorTurma(req, res) {
+        try {
+            const turmaId = Number(req.params.turmaId);
+            const matriculas = await db.Matriculas.findAndCountAll({
+                where: {
+                    turma_id: turmaId,
+                    status: "confirmado"
+                },
+                limit: 20,
+                order: [['estudante_id', 'ASC']]
+            });
+            res.status(200).json(matriculas);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
 }
 
 module.exports = PessoaController;
